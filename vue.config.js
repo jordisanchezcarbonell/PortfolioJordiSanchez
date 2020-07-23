@@ -1,9 +1,8 @@
 module.exports = {
-  baseUrl: "/Kazukun23/",
+  baseUrl: "/",
   lintOnSave: false,
 
   chainWebpack: (config) => {
     config.module.rules.delete("eslint");
   },
-
-}
+};
