@@ -9,13 +9,13 @@
         <strong class="group-name" >Centre d’Estudis Politècnics
         </strong>
       </div>
-      <div class="tipoghrafiasecundaria" ><p>Higher-technician in Web Applications Development-Studying</p></div>
+      <div class="tipoghrafiasecundaria" ><p>Higher-technician in Web Applications Development 2019-2020</p></div>
 
       <div class="resume-description">
         <strong class="group-name" >Centre d’Estudis Politècnics
 </strong>
       </div>
-      <div class="tipoghrafiasecundaria"><p>Higher-technician in Multi-platform Software Development-Studying</p></div>   
+      <div class="tipoghrafiasecundaria"><p>Higher-technician in Multi-platform Software Development 2017-2020</p></div>   
 
       <div class="resume-description">
         <strong class="group-name" >Escola del Treball
@@ -45,8 +45,8 @@ export default {
 .position {
   position: relative;
 }
-.tipoghrafiasecundaria{
-  font-family: 'Roboto', sans-serif;
+.tipoghrafiasecundaria {
+  font-family: "Roboto", sans-serif;
 }
 .resume-icon {
   margin-bottom: 25px;
