@@ -61,6 +61,7 @@
           <li class="filter" :class="{ active: isFiltered('Android') }" @click="filter('Android')">Android</li>
           <li class="filter" :class="{ active: isFiltered('JSC') }" @click="filter('JSC')">Javascript</li>
                     <li class="filter" :class="{ active: isFiltered('Vue') }" @click="filter('Vue')">Vue</li>
+                    <li class="filter" :class="{ active: isFiltered('React') }" @click="filter('React')">React</li>
 
         </ul>
       </div>
@@ -72,154 +73,168 @@
 
           <div class="portfolio-link">
               <h1 align="center" class="textoTitulo">{{post.title}}</h1>
+                            <h1 align="center" class="textoTitulo">{{post.Teconologia}}</h1>
+
             <a aria-label="ver detalles" :href="post.site_url" class="popup_content" target="_blank">See</a>
           </div>
+          
         </div>
+              
       </transition-group>
+      
     </div>
+
+                  
+         
+          
   </section>
 </template>
 
 <script>
-  import Title from './Title'
+import Title from "./Title";
 
-  export default {
-    name: 'Portfolio',
-    props: ['category', 'posts'],
-    components: {
-      Title
-    },
-    data() {
-      return {
-        currentFilter: 'all'
+export default {
+  name: "Portfolio",
+  props: ["category", "posts"],
+  components: {
+    Title,
+  },
+  data() {
+    return {
+      currentFilter: "all",
+    };
+  },
+  computed: {
+    filteredPosts() {
+      if (this.currentFilter === "all") {
+        return this.posts;
       }
-    },
-    computed: {
-      filteredPosts() {
-        if (this.currentFilter === 'all') {
-          return this.posts
-        }
 
-        return this.posts.filter(post => post.tags && post.tags.includes(this.currentFilter))
-      }
+      return this.posts.filter(
+        (post) => post.tags && post.tags.includes(this.currentFilter)
+      );
     },
-    methods: {
-      isFiltered(name) {
-        return this.currentFilter === name
-      },
+  },
+  methods: {
+    isFiltered(name) {
+      return this.currentFilter === name;
+    },
 
-      filter(name) {
-        this.currentFilter = name
-      }
-    }
-  }
+    filter(name) {
+      this.currentFilter = name;
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">
-  @import '@/styles/variables.scss';
+@import "@/styles/variables.scss";
 
-  $bg-portfolio: map-get($colors, dark) !default;
-  $btn: map-get($colors, secondary) !default;
+$bg-portfolio: map-get($colors, dark) !default;
+$btn: map-get($colors, secondary) !default;
 
-  .filter-enter-active, .filter-leave-active, .filter-move {
-    transition: all 1s;
+.filter-enter-active,
+.filter-leave-active,
+.filter-move {
+  transition: all 1s;
+}
+.filter-enter,
+.filter-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.filter-leave-active {
+  position: absolute;
+}
+
+.my-portfolio {
+  background-color: $bg-portfolio;
+  color: map-get($colors, light);
+}
+
+/deep/ .text-wrapper {
+  &:after {
+    border-bottom: 1px solid map-get($colors, light);
   }
-  .filter-enter, .filter-leave-to {
-    opacity: 0;
-    transform: translateY(30px);
-  }
+}
 
-  .filter-leave-active {
-    position: absolute;
-  }
+.breadcrumbs {
+  text-align: center;
 
+  li {
+    display: inline-block;
+    text-transform: uppercase;
+    margin: 0 10px;
+    color: lighten($bg-portfolio, 60%);
+    cursor: pointer;
 
-  .my-portfolio {
-    background-color: $bg-portfolio;
-    color: map-get($colors, light);
-  }
-
-  /deep/ .text-wrapper {
-    &:after {
-      border-bottom: 1px solid map-get($colors, light);
+    &.active {
+      color: map-get($colors, light);
+      border-bottom: 1px solid $btn;
     }
   }
+}
 
-  .breadcrumbs {
-    text-align: center;
+.portfolio-table {
+  margin-bottom: 50px;
+}
 
-    li {
-      display: inline-block;
-      text-transform: uppercase;
-      margin: 0 10px;
-      color: lighten($bg-portfolio, 60%);
-      cursor: pointer;
+.portfolio-item {
+  width: 300px;
+  max-height: 250px;
+  overflow: hidden;
+  margin-bottom: 20px;
 
-      &.active {
-        color: map-get($colors, light);
-        border-bottom: 1px solid $btn;
-      }
-    }
+  img {
+    width: 260px;
+    height: 200px;
+  }
+}
+
+.portfolio-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  text-align: center;
+  padding-top: 60%;
+  opacity: 0;
+  transition: all 0.5s ease-out;
+
+  &:hover {
+    border: 1px solid white;
+
+    opacity: 1;
+    padding-top: 10%;
   }
 
-  .portfolio-table {
-    margin-bottom: 50px;
-  }
+  a {
+    background-color: transparent;
+    border: 1px solid $btn;
+    padding: 10px 35px;
+    font-weight: 600;
+    font-size: 2rem;
+    display: inline-block;
+    transition: all 0.5s sceal-out;
 
-  .portfolio-item {
-    width: 300px;
-    max-height: 250px;
-    overflow: hidden;
-    margin-bottom: 20px;
-
-    img {
-      width: 300px;
-      height: 300px;    
-      }
-  }
-
-  .portfolio-link {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,.8);
-    text-align: center;
-    padding-top: 60%;
-    opacity: 0;
-    transition: all .5s ease-out;
-  
     &:hover {
-      opacity: 1;
-      padding-top: 30%;
-    }
-
-    a {
-      background-color: transparent;
-      border: 1px solid $btn;
-      padding: 10px 35px;
-      font-weight: 600;
-      font-size: 2rem;
-      display: inline-block;
-      transition: all 0.5s sceal-out;
-
-      &:hover {
-        color: lighten($btn, 30%);
-      }
-    }
-
-    .imagentamaño{
-      width: 300px;
-      height: 300px;
-    }
-
-    .textoTitulo{
-      text-align: center;
-      font-family: 'Roboto', sans-serif;
-      font-size: 1.5rem !important;
-            margin-bottom: 9vh;
-
+      color: lighten($btn, 30%);
     }
   }
+
+  .imagentamaño {
+    width: 300px;
+    height: 300px;
+  }
+
+  .textoTitulo {
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    font-size: 1.5rem !important;
+    margin-bottom: 3vh;
+  }
+}
 </style>
