@@ -91,7 +91,7 @@ export default {
   },
 mounted () {
     axios
-      .get('https://apiproyecto-jordisanchez.herokuapp.com/api/products')
+      .get('https://purebade-api32-2ayh51377.vercel.app')
       .then(response => {
        this.posts=response.data
        console.log(this.posts)
